@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warriors Combat Fitness — Tirupur</title>
+<meta name="description" content="Warriors Combat Fitness — Karate, Judo, Kudo, Silambam, Kickboxing & Muay Thai training for kids and adults on P.N. Road, Tirupur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#15120f;
+    --bg-alt:#1c1712;
+    --bg-card:#211b15;
+    --ink:#f2e9db;
+    --ink-dim:#b8ac97;
+    --ink-faint:#7d7364;
+    --red:#b3251f;
+    --red-bright:#d13c2f;
+    --gold:#d1a13e;
+    --line:#38312a;
+
+    --belt-white:#f2e9db;
+    --belt-yellow:#e8c547;
+    --belt-orange:#d97a2f;
+    --belt-green:#3c7a54;
+    --belt-blue:#2f5b86;
+    --belt-brown:#6b4226;
+    --belt-black:#0c0a08;
+
+    --display: 'Anton', sans-serif;
+    --body: 'Work Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:0.01em;text-transform:uppercase;}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+  /* ---------- Belt stripe signature ---------- */
+  .belt-stripe{
+    display:flex;
+    width:100%;
+    height:10px;
+  }
+  .belt-stripe span{flex:1;}
+  .belt-stripe .b-white{background:var(--belt-white);}
+  .belt-stripe .b-yellow{background:var(--belt-yellow);}
+  .belt-stripe .b-orange{background:var(--belt-orange);}
+  .belt-stripe .b-green{background:var(--belt-green);}
+  .belt-stripe .b-blue{background:var(--belt-blue);}
+  .belt-stripe .b-brown{background:var(--belt-brown);}
+  .belt-stripe .b-black{background:var(--belt-black);}
+
+  .belt-stripe.reveal span{
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.7s ease;
+  }
+  .belt-stripe.reveal.in-view span{transform:scaleX(1);}
+  .belt-stripe.reveal span:nth-child(1){transition-delay:0s;}
+  .belt-stripe.reveal span:nth-child(2){transition-delay:0.05s;}
+  .belt-stripe.reveal span:nth-child(3){transition-delay:0.1s;}
+  .belt-stripe.reveal span:nth-child(4){transition-delay:0.15s;}
+  .belt-stripe.reveal span:nth-child(5){transition-delay:0.2s;}
+  .belt-stripe.reveal span:nth-child(6){transition-delay:0.25s;}
+  .belt-stripe.reveal span:nth-child(7){transition-delay:0.3s;}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(21,18,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:76px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{
+    width:38px;height:38px;
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--display);
+    font-size:19px;
+    color:var(--gold);
+    flex:none;
+    transform:rotate(45deg);
+  }
+  .brand-mark span{transform:rotate(-45deg);}
+  .brand-name{font-family:var(--display);font-size:16px;letter-spacing:0.03em;text-transform:uppercase;line-height:1.15;}
+  .brand-name small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--ink-faint);text-transform:uppercase;margin-top:2px;}
+
+  .nav-links{display:flex;gap:34px;font-size:14px;text-transform:uppercase;letter-spacing:0.04em;}
+  .nav-links a{position:relative;padding:6px 0;}
+  .nav-links a::after{
+    content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;
+    background:var(--red-bright);transform:scaleX(0);transform-origin:right;
+    transition:transform 0.25s ease;
+  }
+  .nav-links a:hover::after,.nav-links a:focus-visible::after{transform:scaleX(1);transform-origin:left;}
+
+  .nav-cta{
+    display:flex;align-items:center;gap:14px;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:0.06em;text-transform:uppercase;
+    padding:11px 20px;
+    border:1px solid var(--gold);
+    transition:background 0.2s ease,color 0.2s ease;
+    white-space:nowrap;
+  }
+  .btn-solid{background:var(--red);border-color:var(--red);color:var(--ink);}
+  .btn-solid:hover{background:var(--red-bright);}
+  .btn-ghost{color:var(--gold);}
+  .btn-ghost:hover{background:var(--gold);color:var(--bg);}
+
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);color:var(--ink);width:42px;height:42px;font-size:18px;cursor:pointer;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:88px 0 0;
+    background:
+      radial-gradient(ellipse 900px 500px at 82% -10%, rgba(179,37,31,0.22), transparent 60%),
+      radial-gradient(ellipse 700px 500px at -10% 20%, rgba(209,161,62,0.12), transparent 60%),
+      var(--bg);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:40px;
+    align-items:center;
+  }
+  .hero .eyebrow{margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+  .hero .eyebrow::before{content:"";width:22px;height:2px;background:var(--gold);display:inline-block;}
+  .hero h1{
+    font-size:clamp(46px,7vw,92px);
+    line-height:0.94;
+    color:var(--ink);
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--red-bright);
+    display:block;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:480px;
+    color:var(--ink-dim);
+    font-size:17px;
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
+  .btn-lg{padding:15px 26px;font-size:13px;}
+
+  .hero-facts{
+    display:flex;gap:0;margin-top:52px;
+    border-top:1px solid var(--line);
+    padding-top:18px;
+  }
+  .hero-facts div{flex:1;padding-right:18px;}
+  .hero-facts .num{font-family:var(--mono);font-size:22px;color:var(--gold);}
+  .hero-facts .lbl{font-size:12px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;}
+
+  .hero-panel{
+    position:relative;
+    border:1px solid var(--line);
+    background:var(--bg-card);
+    padding:34px 30px;
+  }
+  .hero-panel::before{
+    content:"";position:absolute;top:-1px;left:-1px;width:46px;height:3px;background:var(--red-bright);
+  }
+  .hero-panel h3{font-size:20px;color:var(--gold);margin-bottom:6px;}
+  .hero-panel .sub{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:22px;}
+  .disc-list{display:flex;flex-direction:column;gap:0;}
+  .disc-list li{
+    list-style:none;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:13px 0;
+    border-bottom:1px solid var(--line);
+    font-size:15px;
+  }
+  .disc-list li:last-child{border-bottom:none;}
+  .disc-list .tag{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);text-transform:uppercase;}
+
+  /* ---------- Section shell ---------- */
+  section{padding:88px 0;}
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:24px;margin-bottom:48px;flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(30px,4vw,46px);}
+  .section-head p{max-width:400px;color:var(--ink-dim);font-size:15px;}
+
+  /* ---------- Disciplines ---------- */
+  .disciplines{background:var(--bg-alt);}
+  .disc-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .disc-card{
+    background:var(--bg-alt);
+    padding:34px 28px;
+    display:flex;flex-direction:column;gap:16px;
+    transition:background 0.25s ease;
+  }
+  .disc-card:hover{background:var(--bg-card);}
+  .disc-icon{width:44px;height:44px;color:var(--gold);}
+  .disc-card h3{font-size:22px;color:var(--ink);}
+  .disc-card .disc-belt{font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--red-bright);}
+  .disc-card p{font-size:14.5px;color:var(--ink-dim);}
+
+  /* ---------- Tracks (kids/adults) ---------- */
+  .tracks-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);
+  }
+  .track-card{background:var(--bg);padding:44px 38px;position:relative;}
+  .track-card .eyebrow{margin-bottom:14px;}
+  .track-card h3{font-size:30px;margin-bottom:14px;}
+  .track-card p{color:var(--ink-dim);font-size:15px;margin-bottom:22px;max-width:420px;}
+  .track-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .track-card li{
+    font-size:14px;color:var(--ink);
+    padding-left:22px;position:relative;
+  }
+  .track-card li::before{
+    content:"";position:absolute;left:0;top:8px;width:10px;height:2px;background:var(--gold);
+  }
+
+  /* ---------- Philosophy ---------- */
+  .philosophy{
+    display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:center;
+  }
+  .philosophy blockquote{
+    font-family:var(--display);
+    font-size:clamp(24px,3vw,34px);
+    line-height:1.2;
+    color:var(--ink);
+    text-transform:none;
+  }
+  .philosophy blockquote span{color:var(--gold);}
+  .philosophy .attrib{margin-top:18px;font-family:var(--mono);font-size:12px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.06em;}
+  .philosophy-copy p{color:var(--ink-dim);font-size:15.5px;margin-bottom:16px;}
+  .philosophy-copy p:last-child{margin-bottom:0;}
+
+  /* ---------- Location ---------- */
+  .location{background:var(--bg-alt);}
+  .loc-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .loc-info{background:var(--bg-alt);padding:42px 38px;}
+  .loc-info h3{font-size:24px;margin-bottom:24px;}
+  .loc-row{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--line);}
+  .loc-row:first-of-type{border-top:none;}
+  .loc-row .k{width:76px;flex:none;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gold);padding-top:2px;}
+  .loc-row .v{font-size:15px;color:var(--ink);}
+  .loc-row .v small{display:block;color:var(--ink-faint);font-size:12.5px;margin-top:3px;}
+  .loc-actions{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;}
+  .map-frame{background:var(--bg-card);min-height:340px;}
+  .map-frame iframe{width:100%;height:100%;min-height:340px;border:0;filter:grayscale(0.4) contrast(1.05);}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:linear-gradient(120deg, var(--red) 0%, #8a1c17 100%);
+    padding:60px 0;
+  }
+  .cta-inner{
+    display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;
+  }
+  .cta-inner h2{font-size:clamp(26px,4vw,40px);color:var(--ink);max-width:560px;}
+  .cta-band .btn{border-color:var(--ink);}
+  .cta-band .btn-solid{background:var(--ink);color:var(--bg);border-color:var(--ink);}
+  .cta-band .btn-solid:hover{background:transparent;color:var(--ink);}
+  .cta-band .btn-ghost{color:var(--ink);}
+  .cta-band .btn-ghost:hover{background:var(--ink);color:var(--bg);}
+
+  /* ---------- Footer ---------- */
+  footer{padding:52px 0 34px;}
+  .foot-grid{
+    display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap;
+    padding-bottom:30px;
+  }
+  .foot-brand .brand-name{font-size:18px;}
+  .foot-links{display:flex;gap:40px;flex-wrap:wrap;}
+  .foot-col h4{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-faint);margin-bottom:14px;}
+  .foot-col a,.foot-col p{display:block;font-size:14px;color:var(--ink-dim);margin-bottom:8px;}
+  .foot-col a:hover{color:var(--gold);}
+  .foot-bottom{
+    border-top:1px solid var(--line);padding-top:22px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.04em;
+  }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal-up{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .reveal-up.in-view{opacity:1;transform:translateY(0);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr;}
+    .disc-grid{grid-template-columns:repeat(2,1fr);}
+    .tracks-grid,.loc-grid,.philosophy{grid-template-columns:1fr;}
+    .philosophy{gap:30px;}
+  }
+  @media (max-width:720px){
+    .nav-links,.nav-cta .btn-ghost{display:none;}
+    .nav-toggle{display:block;}
+    .disc-grid{grid-template-columns:1fr;}
+    .hero-facts{flex-wrap:wrap;row-gap:18px;}
+    .hero-facts div{flex:1 1 45%;}
+  }
+
+  nav.mobile-open ~ .mobile-menu,
+  .mobile-menu{display:none;}
+  .mobile-menu.open{
+    display:flex;flex-direction:column;
+    padding:18px 28px 26px;
+    border-top:1px solid var(--line);
+    gap:2px;
+    background:var(--bg);
+  }
+  .mobile-menu a{padding:14px 0;font-size:15px;text-transform:uppercase;letter-spacing:0.04em;border-bottom:1px solid var(--line);}
+  .mobile-menu .btn{margin-top:14px;justify-content:center;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">
+      <div class="brand-mark"><span>W</span></div>
+      <div class="brand-name">Warriors<br>Combat Fitness<small>Karate · Judo · Silambam</small></div>
+    </div>
+    <div class="nav-links">
+      <a href="#disciplines">Disciplines</a>
+      <a href="#programs">Programs</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#location">Visit Us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="https://wa.me/919842588783" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn btn-solid" href="tel:+919842588783">Call Now</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#disciplines">Disciplines</a>
+    <a href="#programs">Programs</a>
+    <a href="#philosophy">Philosophy</a>
+    <a href="#location">Visit Us</a>
+    <a class="btn btn-solid" href="tel:+919842588783">Call Now — +91 98425 88783</a>
+  </div>
+  <div class="belt-stripe">
+    <span class="b-white"></span><span class="b-yellow"></span><span class="b-orange"></span>
+    <span class="b-green"></span><span class="b-blue"></span><span class="b-brown"></span><span class="b-black"></span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">P.N. Road, Tirupur</div>
+      <h1>Every belt<br>tells a story.<em>Start yours.</em></h1>
+      <p class="lede">Warriors Combat Fitness trains Tirupur's kids and adults in Karate, Judo, Kudo, Silambam, Kickboxing and Muay Thai — six disciplines, one mat, one standard of discipline.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid btn-lg" href="https://wa.me/919842588783" target="_blank" rel="noopener">Message on WhatsApp</a>
+        <a class="btn btn-ghost btn-lg" href="#disciplines">See the Disciplines</a>
+      </div>
+      <div class="hero-facts">
+        <div><div class="num">06</div><div class="lbl">Disciplines Taught</div></div>
+        <div><div class="num">Mon–Sat</div><div class="lbl">Training Days</div></div>
+        <div><div class="num">5 PM+</div><div class="lbl">Evening Sessions</div></div>
+        <div><div class="num">Kids + Adults</div><div class="lbl">All Age Groups</div></div>
+      </div>
+    </div>
+    <div class="hero-panel reveal-up">
+      <h3>Today's Curriculum</h3>
+      <div class="sub">What's on the mat</div>
+      <ul class="disc-list">
+        <li>Karate <span class="tag">Striking</span></li>
+        <li>Judo <span class="tag">Grappling</span></li>
+        <li>Kudo <span class="tag">Full Contact</span></li>
+        <li>Silambam <span class="tag">Tamil Weapon Art</span></li>
+        <li>Kickboxing <span class="tag">Conditioning</span></li>
+        <li>Muay Thai <span class="tag">Striking</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="belt-stripe reveal"><span class="b-white"></span><span class="b-yellow"></span><span class="b-orange"></span><span class="b-green"></span><span class="b-blue"></span><span class="b-brown"></span><span class="b-black"></span></div>
+
+<section class="disciplines" id="disciplines">
+  <div class="wrap">
+    <div class="section-head reveal-up">
+      <h2>Six disciplines.<br>One dojo.</h2>
+      <p>From striking to grappling to the stick-fighting traditions of Tamil Nadu — train what fits you, or train it all.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="disc-grid">
+
+      <div class="disc-card reveal-up">
+        <svg class="disc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="19"/><path d="M24 10v14l9 6"/></svg>
+        <h3>Karate</h3>
+        <div class="disc-belt">Striking · Kata · Discipline</div>
+        <p>Traditional striking, stances and kata — the foundation most students begin with.</p>
+      </div>
+
+      <div class="disc-card reveal-up">
+        <svg class="disc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 30l14-18 14 18"/><path d="M14 30h20"/><circle cx="22" cy="10" r="3"/></svg>
+        <h3>Judo</h3>
+        <div class="disc-belt">Throws · Grappling · Control</div>
+        <p>Balance, leverage and throws — using an opponent's force against them.</p>
+      </div>
+
+      <div class="disc-card reveal-up">
+        <svg class="disc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="10" y="10" width="28" height="28" rx="2"/><path d="M10 24h28M24 10v28"/></svg>
+        <h3>Kudo</h3>
+        <div class="disc-belt">Full Contact · Headgear</div>
+        <p>A hybrid full-contact style blending striking and grappling under protective gear.</p>
+      </div>
+
+      <div class="disc-card reveal-up">
+        <svg class="disc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38L38 10" /><circle cx="10" cy="38" r="2.5" fill="currentColor" stroke="none"/><circle cx="38" cy="10" r="2.5" fill="currentColor" stroke="none"/></svg>
+        <h3>Silambam</h3>
+        <div class="disc-belt">Tamil Weapon Art · Bamboo Staff</div>
+        <p>Tamil Nadu's own martial art — footwork and staff work passed down for centuries.</p>
+      </div>
+
+      <div class="disc-card reveal-up">
+        <svg class="disc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="16" r="7"/><path d="M12 40c0-8 5-13 12-13s12 5 12 13"/></svg>
+        <h3>Kickboxing</h3>
+        <div class="disc-belt">Conditioning · Combos</div>
+        <p>Fast-paced striking combinations built for fitness, speed and stamina.</p>
+      </div>
+
+      <div class="disc-card reveal-up">
+        <svg class="disc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 34l8-20 8 20M17 27h10"/></svg>
+        <h3>Muay Thai</h3>
+        <div class="disc-belt">The Art of Eight Limbs</div>
+        <p>Fists, elbows, knees and shins — Thailand's striking art, taught with respect for its roots.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="programs">
+  <div class="wrap">
+    <div class="section-head reveal-up">
+      <h2>Built for two<br>kinds of warrior.</h2>
+      <p>Every class is grouped by age and goal, so kids and adults each train at the right pace.</p>
+    </div>
+    <div class="tracks-grid">
+      <div class="track-card reveal-up">
+        <div class="eyebrow">For Children</div>
+        <h3>Young Warriors</h3>
+        <p>Structured classes that build focus, respect and coordination early — through Karate, Judo and Silambam fundamentals.</p>
+        <ul>
+          <li>Age-appropriate discipline and drills</li>
+          <li>Belt-based progress your child can see</li>
+          <li>Karate, Judo and Silambam basics</li>
+          <li>Small-group instruction with close supervision</li>
+        </ul>
+      </div>
+      <div class="track-card reveal-up">
+        <div class="eyebrow">For Adults</div>
+        <h3>Full Combat Fitness</h3>
+        <p>Strength, conditioning and real technique — from beginner self-defense to full-contact sparring.</p>
+        <ul>
+          <li>Kickboxing and Muay Thai conditioning</li>
+          <li>Judo and Kudo for grappling and control</li>
+          <li>Self-defense fundamentals from day one</li>
+          <li>Evening batches to fit a working schedule</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="belt-stripe reveal"><span class="b-white"></span><span class="b-yellow"></span><span class="b-orange"></span><span class="b-green"></span><span class="b-blue"></span><span class="b-brown"></span><span class="b-black"></span></div>
+
+<section id="philosophy">
+  <div class="wrap philosophy">
+    <div class="reveal-up">
+      <blockquote>The belt only marks <span>where you've trained.</span> The mat is where you actually change.</blockquote>
+      <div class="attrib">— Warriors Combat Fitness</div>
+    </div>
+    <div class="philosophy-copy reveal-up">
+      <p>Warriors Combat Fitness runs out of P.N. Road in Tirupur, training students across six martial arts and combat sports under one roof — from traditional Karate and Judo to Tamil Nadu's own Silambam, alongside Kudo, Kickboxing and Muay Thai.</p>
+      <p>Classes run every evening, Monday through Saturday, for children and adults alike. Whether the goal is self-defense, competition, or simply fitness with structure, students train at their own level while working toward the next belt.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap cta-inner">
+    <h2>Ready to step on the mat?</h2>
+    <div class="hero-actions">
+      <a class="btn btn-solid btn-lg" href="tel:+919842588783">Call +91 98425 88783</a>
+      <a class="btn btn-ghost btn-lg" href="https://wa.me/919842588783" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<section class="location" id="location">
+  <div class="wrap">
+    <div class="section-head reveal-up">
+      <h2>Find the dojo.</h2>
+      <p>Tucked behind Shanthi Theatre, just off P.N. Road.</p>
+    </div>
+    <div class="loc-grid">
+      <div class="loc-info reveal-up">
+        <h3>Warriors Combat Fitness</h3>
+        <div class="loc-row">
+          <div class="k">Address</div>
+          <div class="v">16, Elango Nagar, 4th Street<small>(Backside of Shanthi Theatre), P.N. Road, Tirupur, Tamil Nadu – 641602</small></div>
+        </div>
+        <div class="loc-row">
+          <div class="k">Phone</div>
+          <div class="v">+91 98425 88783</div>
+        </div>
+        <div class="loc-row">
+          <div class="k">Hours</div>
+          <div class="v">Monday – Saturday<small>Evening batches from 5:00 PM onwards</small></div>
+        </div>
+        <div class="loc-row">
+          <div class="k">Instagram</div>
+          <div class="v">@warriors_combat_fitness</div>
+        </div>
+        <div class="loc-actions">
+          <a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&query=16+Elango+Nagar+4th+Street+P.N.+Road+Tirupur+Tamil+Nadu+641602" target="_blank" rel="noopener">Get Directions</a>
+          <a class="btn btn-ghost" href="tel:+919842588783">Call the Academy</a>
+        </div>
+      </div>
+      <div class="map-frame reveal-up">
+        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q=16%2C%20Elango%20Nagar%2C%204th%20Street%2C%20P.N.%20Road%2C%20Tirupur%2C%20Tamil%20Nadu%20641602&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          title="Map to Warriors Combat Fitness"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="belt-stripe" style="margin-bottom:44px;">
+      <span class="b-white"></span><span class="b-yellow"></span><span class="b-orange"></span><span class="b-green"></span><span class="b-blue"></span><span class="b-brown"></span><span class="b-black"></span>
+    </div>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="brand-mark"><span>W</span></div>
+          <div class="brand-name">Warriors<br>Combat Fitness</div>
+        </div>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4>Visit</h4>
+          <p>16, Elango Nagar, 4th Street</p>
+          <p>P.N. Road, Tirupur – 641602</p>
+        </div>
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <a href="tel:+919842588783">+91 98425 88783</a>
+          <a href="https://wa.me/919842588783" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="#">@warriors_combat_fitness</a>
+        </div>
+        <div class="foot-col">
+          <h4>Train</h4>
+          <a href="#disciplines">Disciplines</a>
+          <a href="#programs">Kids &amp; Adults</a>
+          <a href="#location">Timings</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Warriors Combat Fitness, Tirupur</span>
+      <span>Karate · Judo · Kudo · Silambam · Kickboxing · Muay Thai</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    toggle.textContent = open ? '✕' : '☰';
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+    toggle.textContent = '☰';
+  }));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal-up, .belt-stripe.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
